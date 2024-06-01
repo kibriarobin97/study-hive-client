@@ -1,10 +1,24 @@
+import { useMutation } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const AddClass = () => {
 
     const { user } = useAuth()
+    const axiosSecure = useAxiosSecure()
 
-    const handleAddClass = e => {
+    const { mutateAsync } = useMutation({
+        mutationFn: async classData => {
+            const {data} = await axiosSecure.post('/classes', classData)
+            return data
+        },
+        onSuccess: () => {
+            toast.success('Class added successfully')
+        }
+    })
+
+    const handleAddClass = async e => {
         e.preventDefault()
 
         const form = e.target;
@@ -14,13 +28,20 @@ const AddClass = () => {
         const price = form.price.value;
         const photo = form.photo.value;
         const description = form.description.value;
+        const status = 'Pending'
         const teacher_name= user?.displayName;
         const teacher_email = user?.email;
         const teacher_photo = user?.photoURL;
 
-        const claasInfo = {title, category, price, photo, description, teacher_name, teacher_email, teacher_photo}
+        try{
+            const classInfo = {title, category, price, status, photo, description, teacher_name, teacher_email, teacher_photo}
 
-        console.log(claasInfo)
+            await mutateAsync(classInfo)
+        }
+        catch(err){
+            console.log(err)
+        }
+
     }
 
     return (
@@ -32,13 +53,13 @@ const AddClass = () => {
                 <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-base-200 mx-auto w-full">
                     <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                         <div className="col-span-full sm:col-span-3">
-                            <label htmlFor="firstname" className="text-sm font-medium">Title</label>
+                            <label  className="text-sm font-medium">Title</label>
                             <input name="title" type="text" placeholder="Title" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-400 border-gray-700 p-2" />
                         </div>
                         <div className="col-span-full sm:col-span-3">
-                            <label htmlFor="lastname" className="text-sm font-medium">Category</label>
+                            <label  className="text-sm font-medium">Category</label>
                             <select name="category" id="" className="w-full rounded-md focus:ring focus:ring-opacity-75 p-2 text-gray-900 focus:ring-violet-400 border-gray-700">
-                                <option value="web devlopment">Web Development</option>
+                                <option value="web development">Web Development</option>
                                 <option value="digital marketing">Digital Marketing</option>
                                 <option value="graphic design">Graphic Design</option>
                                 <option value="ux/ui design">UI/UX Design</option>
@@ -46,23 +67,23 @@ const AddClass = () => {
                             </select>
                         </div>
                         <div className="col-span-full sm:col-span-3">
-                            <label htmlFor="firstname" className="text-sm font-medium">Price</label>
+                            <label  className="text-sm font-medium">Price</label>
                             <input name="price" type="number" placeholder="Price" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-400 border-gray-700 p-2" />
                         </div>
                         <div className="col-span-full sm:col-span-3">
-                            <label htmlFor="firstname" className="text-sm font-medium">PhotoURL</label>
+                            <label  className="text-sm font-medium">PhotoURL</label>
                             <input name="photo" type="text" placeholder="Photo URL" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-400 border-gray-700 p-2" />
                         </div>
                         <div className="col-span-full sm:col-span-3">
-                            <label htmlFor="firstname" className="text-sm font-medium">User Email</label>
+                            <label className="text-sm font-medium">User Email</label>
                             <input name="email" disabled defaultValue={user?.email} type="email" placeholder="User email" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-400 border-gray-700 p-2" />
                         </div>
                         <div className="col-span-full sm:col-span-3">
-                            <label htmlFor="firstname" className="text-sm font-medium">User Name</label>
+                            <label  className="text-sm font-medium">User Name</label>
                             <input name="name" disabled defaultValue={user?.displayName} type="text" placeholder="User name" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-400 border-gray-700 p-2" />
                         </div>
                         <div className="col-span-full">
-                            <label htmlFor="bio" className="text-sm font-medium">Description</label>
+                            <label className="text-sm font-medium">Description</label>
                             <textarea name="description" placeholder="Description" className="w-full rounded-md focus:ring focus:ring-opacity-75 p-2 text-gray-900 focus:ring-violet-400 border-gray-700"></textarea>
                         </div>
                         <div>
