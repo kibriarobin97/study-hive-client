@@ -3,18 +3,21 @@ import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { useEffect, useState } from "react";
 import icon from "../../assets/teaching/Vector.png"
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Review = () => {
 
-    const [reviews, setReviews] = useState([])
+    const axiosPublic = useAxiosPublic()
 
-    useEffect(() => {
-        fetch('http://localhost:5000/reviews')
-            .then(res => res.json())
-            .then(data => setReviews(data))
-    }, [])
+    const {data: reviews =[]} = useQuery({
+        queryKey: ['reviews'],
+        queryFn: async () => {
+        const res = await axiosPublic.get('/reviews')
+        return res.data
+        }
+    })
 
     return (
         <section>

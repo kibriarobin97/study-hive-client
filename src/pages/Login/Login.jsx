@@ -39,7 +39,8 @@ const Login = () => {
             .then(result => {
                 const userInfo = {
                     name: result.user?.displayName,
-                    email: result.user?.email
+                    email: result.user?.email,
+                    photo: result.user?.photoURL
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
