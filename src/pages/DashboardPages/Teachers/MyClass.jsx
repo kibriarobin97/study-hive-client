@@ -1,22 +1,33 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import MyClassCard from "./MyClassCard";
+
 
 const MyClass = () => {
 
-    
+    const axiosSecure = useAxiosSecure()
+    const { user } = useAuth()
+
+    const { data: classes } = useQuery({
+        queryKey: ['classes'],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/classes/${user?.email}`)
+            return data
+        }
+    })
+    console.log(classes)
 
     return (
         <div>
-            <h3 className="text-3xl font-medium text-center">My Class</h3>
-            <div>
-                <div className="card card-side bg-base-100 shadow-xl">
-                    <figure><img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">New movie is released!</h2>
-                        <p>Click the button to watch on Jetflix app.</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Watch</button>
-                        </div>
-                    </div>
-                </div>
+            <h3 className="text-3xl font-medium text-center mb-8">My Classes</h3>
+            <div className="p-5 space-y-5">
+                {
+                    classes?.map(course => <MyClassCard
+                        key={course?._id}
+                        course={course}
+                    ></MyClassCard>)
+                }
             </div>
         </div>
     );

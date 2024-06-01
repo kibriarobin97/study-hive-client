@@ -2,11 +2,13 @@ import { useMutation } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {
 
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const { mutateAsync } = useMutation({
         mutationFn: async classData => {
@@ -15,6 +17,7 @@ const AddClass = () => {
         },
         onSuccess: () => {
             toast.success('Class added successfully')
+            navigate('/my-class')
         }
     })
 
@@ -59,11 +62,11 @@ const AddClass = () => {
                         <div className="col-span-full sm:col-span-3">
                             <label  className="text-sm font-medium">Category</label>
                             <select name="category" id="" className="w-full rounded-md focus:ring focus:ring-opacity-75 p-2 text-gray-900 focus:ring-violet-400 border-gray-700">
-                                <option value="web development">Web Development</option>
-                                <option value="digital marketing">Digital Marketing</option>
-                                <option value="graphic design">Graphic Design</option>
-                                <option value="ux/ui design">UI/UX Design</option>
-                                <option value="video editing">Video Editing</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Digital Marketing">Digital Marketing</option>
+                                <option value="Graphic Design">Graphic Design</option>
+                                <option value="UX/UI Design">UI/UX Design</option>
+                                <option value="Video Editing">Video Editing</option>
                             </select>
                         </div>
                         <div className="col-span-full sm:col-span-3">
