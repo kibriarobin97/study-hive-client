@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom"
+import useAuth from "../../hooks/useAuth";
+import defaultProfile from "../../assets/teaching/user.png"
 
 const NavBar = () => {
 
@@ -8,6 +10,13 @@ const NavBar = () => {
         <li><Link to='/teach'>Teach on Study Hive</Link></li>
     </>
 
+    const { user, logOut } = useAuth()
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => console.log('log out'))
+            .catch(error => console.error(error))
+    }
 
     return (
         <div className="navbar bg-black bg-opacity-25 text-white fixed z-10">
@@ -30,9 +39,24 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login'>
-                    <button className="btn btn-secondary">Sign In</button>
-                </Link>
+                {
+                    user ? <div className="flex justify-center items-center gap-1">
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-20 rounded-full">
+                                    <img alt="User Photo" src={user?.photoURL || defaultProfile} />
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-slate-600 bg-opacity-50 rounded-box w-40">
+                                <li><button disabled className="font-bold hover:bg-primary">{user?.displayName || 'User Name'}</button></li>
+                                <li><button onClick={handleLogOut} className="font-bold hover:bg-primary">Log Out</button></li>
+                            </ul>
+                        </div>
+                    </div> : <Link to='/login'>
+                        <button className="btn btn-secondary btn-sm">Sign In</button>
+                    </Link>
+                }
+
             </div>
         </div>
     );
