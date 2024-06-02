@@ -17,7 +17,7 @@ const AddClass = () => {
         },
         onSuccess: () => {
             toast.success('Class added successfully')
-            navigate('/my-class')
+            navigate('/dashboard/my-class')
         }
     })
 
