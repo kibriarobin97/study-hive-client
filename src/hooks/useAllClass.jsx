@@ -1,19 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "./useAuth";
-import useAxiosSecure from "./useAxiosSecure";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useAllClass = () => {
-    const axiosSecure = useAxiosSecure()
-    const { user } = useAuth()
+    const axiosPublic = useAxiosPublic()
 
-    const { refetch, data: classes = [] } = useQuery({
-        queryKey: ['classes', user?.email],
+    const { refetch, isLoading, data: classes = [] } = useQuery({
+        queryKey: [ 'classes' ],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/classes?email=${user?.email}`)
+            const res = await axiosPublic.get('/all-classes')
             return res.data;
         }
     })
-    return [classes, refetch];
+    return [classes, refetch, isLoading];
 };
 
 export default useAllClass;
