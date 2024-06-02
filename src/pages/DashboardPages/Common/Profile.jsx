@@ -1,11 +1,13 @@
 import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
+import useRole from "../../../hooks/useRole";
 
 const Profile = () => {
 
     const { user, loading } = useAuth()
+    const [role, isLoading] = useRole()
 
-    if(loading){
+    if(loading || isLoading){
         return <LoadingSpinner></LoadingSpinner>
     }
 
@@ -31,8 +33,8 @@ const Profile = () => {
                         />
                     </a>
 
-                    <p className='p-2 px-4 text-xs text-white bg-pink-500 rounded-full'>
-                        Admin
+                    <p className='p-2 px-4 text-xs text-white font-semibold bg-orange-400 rounded-full'>
+                        {role}
                     </p>
                     <p className='mt-2 text-xl font-medium text-gray-800 '>
                         User Id: {user?.uid}

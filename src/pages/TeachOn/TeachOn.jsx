@@ -11,7 +11,7 @@ const TeachOn = () => {
 
     const { mutateAsync, isSuccess } = useMutation({
         mutationFn: async teacherData => {
-            const {data} = await axiosSecure.post('/apply-teach', teacherData)
+            const {data} = await axiosSecure.put('/user', teacherData)
             return data
         },
         onSuccess: () => {

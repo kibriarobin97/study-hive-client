@@ -1,17 +1,21 @@
 import { useState } from 'react'
 import { GrLogout } from 'react-icons/gr'
 import { AiOutlineBars } from 'react-icons/ai'
-import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { FaAddressBook, FaChalkboardTeacher } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import useAuth from '../../../hooks/useAuth';
 import logo from "../../../assets/teaching/logo.jpeg"
+import useRole from '../../../hooks/useRole'
+import MenuItem from './Menu/MenuItem'
+import TeacherMenu from './Menu/TeacherMenu';
+import StudentMenu from './Menu/StudentMenu';
+import AdminMenu from './Menu/AdminMenu';
 
 const Sidebar = () => {
     const { logOut } = useAuth()
     const [isActive, setActive] = useState(false)
-
+    const [role] = useRole()
+    console.log(role)
     // Sidebar Responsive Handler
     const handleToggle = () => {
         setActive(!isActive)
@@ -58,49 +62,23 @@ const Sidebar = () => {
 
                     {/* Nav Items */}
                     <div className='flex flex-col justify-between flex-1 mt-6'>
-                        {/* Conditional toggle button here.. */}
 
                         {/*  Menu Items */}
                         <nav>
-                            <NavLink
-                                to='add-class'
-                                className={({ isActive }) =>
-                                    `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-black'
-                                    }`
-                                }
-                            >
-                                <FaAddressBook className='w-5 h-5' />
 
-                                <span className='mx-4 font-medium'>Add Class</span>
-                            </NavLink>
+                            {role === 'Student' && <StudentMenu></StudentMenu>}
+                            {role === 'Teacher' && <TeacherMenu></TeacherMenu>}
+                            {role === 'Admin' && <AdminMenu></AdminMenu>}
 
-                            {/* Add Room */}
-                            <NavLink
-                                to='my-class'
-                                className={({ isActive }) =>
-                                    `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-black'
-                                    }`
-                                }
-                            >
-                                <FaChalkboardTeacher className='w-5 h-5' />
-
-                                <span className='mx-4 font-medium'>My Class</span>
-                            </NavLink>
-                            <NavLink
-                                to='/dashboard'
-                                end
-                                className={({ isActive }) =>
-                                    `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-black'
-                                    }`
-                                }
-                            >
-                                <CgProfile className='w-5 h-5' />
-
-                                <span className='mx-4 font-medium'>Profile</span>
-                            </NavLink>
+                             <MenuItem
+                                label='Profile'
+                                address='/dashboard'
+                                icon={CgProfile}
+                            ></MenuItem>
+                            
                             <button
                                 onClick={logOut}
-                                className='flex w-full items-center px-4 py-2 mt-5 text-black hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
+                                className='flex w-full items-center px-4 py-2 mt-5 text-gray-700 hover:bg-gray-300   hover:text-black transition-colors duration-300 transform'
                             >
                                 <GrLogout className='w-5 h-5' />
 
