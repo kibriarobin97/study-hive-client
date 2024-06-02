@@ -27,15 +27,17 @@ const Register = () => {
                         const userInfo = {
                             name: data.name,
                             email: data.email,
-                            photo: data.photo
+                            photo: data.photo,
+                            role: 'Student',
+                            status: 'Verified'
                         }
-                        axiosPublic.post('/users', userInfo)
+                        axiosPublic.put('/user', userInfo)
                             .then(res => {
-                                if (res.data.insertId) {
-                                    reset();
-                                    toast.success('Created account successfully')
-                                    navigate('/')
-                                }
+                                console.log(res.data)
+                                reset();
+                                toast.success('Created account successfully')
+                                navigate('/')
+
                             })
                     })
                     .catch(error => {
@@ -54,9 +56,11 @@ const Register = () => {
                 const userInfo = {
                     name: result.user?.displayName,
                     email: result.user?.email,
-                    photo: result.user?.photoURL
+                    photo: result.user?.photoURL,
+                    role: 'Student',
+                    status: 'Verified'
                 }
-                axiosPublic.post('/users', userInfo)
+                axiosPublic.put('/user', userInfo)
                     .then(res => {
                         console.log(res.data)
                         toast.success('Successfully login with Google')
@@ -116,14 +120,14 @@ const Register = () => {
                         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
                     </div>
                     <div className="flex justify-center space-x-4">
-                    <button
-                        onClick={handleGoogle}
-                        aria-label="Log in with Google" className="p-3 rounded-sm">
-                        <div className="flex justify-center items-center gap-2 border-2 p-2">
-                            <FaGoogle />
-                            <p className="font-semibold">Sign in with Google</p>
-                        </div>
-                    </button>
+                        <button
+                            onClick={handleGoogle}
+                            aria-label="Log in with Google" className="p-3 rounded-sm">
+                            <div className="flex justify-center items-center gap-2 border-2 p-2">
+                                <FaGoogle />
+                                <p className="font-semibold">Sign in with Google</p>
+                            </div>
+                        </button>
                     </div>
                     <p className="text-xs text-center sm:px-6 text-gray-500">Already have an account?
                         <Link to='/login' className="underline text-primary font-medium"> Sign In</Link>

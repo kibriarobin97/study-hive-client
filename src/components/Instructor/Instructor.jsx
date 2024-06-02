@@ -11,7 +11,7 @@ const Instructor = () => {
                 <h3 className="text-2xl font-semibold text-center md:text-start mt-3 md:mt-0">Become an Instructor</h3>
                 <p className="text-center md:text-start">With user-friendly navigation, interactive content, and expert instructors, you have everything you need to succeed. Don’t wait any longer—start your class today and unlock a world of knowledge and opportunity. Your path to growth and achievement begins here.</p>
                 <div>
-                    <Link><button className="btn btn-primary font-bold md:mt-5 mt-2">Start Teaching Today</button></Link>
+                    <Link to='/teach'><button className="btn btn-primary font-bold md:mt-5 mt-2">Start Teaching Today</button></Link>
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ import AddClass from "../pages/DashboardPages/Teachers/AddClass";
 import MyClass from "../pages/DashboardPages/Teachers/MyClass";
 import Profile from "../pages/DashboardPages/Common/Profile";
 import ClassDetails from "../pages/ClassDetails/ClassDetails";
+import TeachOn from "../pages/TeachOn/TeachOn";
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: '/class-details/:id',
                 element: <ClassDetails></ClassDetails>
+            },
+            {
+                path: '/teach',
+                element: <TeachOn></TeachOn>
             },
             {
                 path: '/login',

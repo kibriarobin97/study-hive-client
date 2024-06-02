@@ -40,9 +40,11 @@ const Login = () => {
                 const userInfo = {
                     name: result.user?.displayName,
                     email: result.user?.email,
-                    photo: result.user?.photoURL
+                    photo: result.user?.photoURL,
+                    role: 'Student',
+                    status: 'Verified'
                 }
-                axiosPublic.post('/users', userInfo)
+                axiosPublic.put('/user', userInfo)
                     .then(res => {
                         console.log(res.data)
                         toast.success('Successfully login with Google')

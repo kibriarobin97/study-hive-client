@@ -35,7 +35,7 @@ const ClassDetails = () => {
                     <img src={classes?.photo} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 bg-gray-500" />
                     <h2 className="mb-1 text-xl font-bold">{classes?.title}</h2>
                     <p className="font-semibold">Price: ${classes?.price}</p>
-                    <p className="text-gray-500">{classes?.description}</p>
+                    <p><span className="font-semibold">Description:</span> {classes?.description}</p>
                     <p className="font-semibold">Category: {classes?.category}</p>
                     <p className="font-semibold">Total Enrolment: {classes?.enrolment}</p>
                 </div>
