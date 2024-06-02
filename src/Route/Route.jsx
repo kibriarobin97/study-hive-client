@@ -8,6 +8,7 @@ import DashboardLayout from "../Root/DashboardLayout";
 import AddClass from "../pages/DashboardPages/Teachers/AddClass";
 import MyClass from "../pages/DashboardPages/Teachers/MyClass";
 import Profile from "../pages/DashboardPages/Common/Profile";
+import ClassDetails from "../pages/ClassDetails/ClassDetails";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: '/all-classes',
                 element: <AllClasses></AllClasses>
+            },
+            {
+                path: '/class-details/:id',
+                element: <ClassDetails></ClassDetails>
             },
             {
                 path: '/login',

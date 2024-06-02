@@ -20,7 +20,7 @@ const MyClassCard = ({ course, handleDeleteItem }) => {
                     </div>
                 </div>
                 <div className="card-actions justify-center mt-3">
-                    <button className="btn btn-secondary text-white font-bold">See Details</button>
+                    <button disabled className="btn btn-secondary text-white font-bold">See Details</button>
                     <button className="btn bg-green-500 text-white font-bold">Update</button>
                     <button onClick={()=> handleDeleteItem(_id)} className="btn bg-red-500 text-white font-bold">Delete</button>
                 </div>

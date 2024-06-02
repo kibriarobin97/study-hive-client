@@ -10,10 +10,10 @@ const MyClass = () => {
 
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
-    console.log(user?.email)
 
     const { data: classes, isLoading, refetch } = useQuery({
-        queryKey: ['classes'],
+        queryKey: ['classes', user?.email],
+        enabled: !!user?.email,
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/my-classes/${user?.email}`)
             return data
@@ -26,8 +26,8 @@ const MyClass = () => {
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#D1A054",
-            cancelButtonColor: "#d33",
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3B82F6",
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {

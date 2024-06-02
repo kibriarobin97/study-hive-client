@@ -4,10 +4,9 @@ import useAllClass from "../../hooks/useAllClass";
 
 const AllClasses = () => {
 
-    const [classes] = useAllClass()
-    console.log(classes)
+    const [classes, isLoading] = useAllClass()
 
-    if (classes.length < 0) {
+    if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
@@ -23,6 +22,7 @@ const AllClasses = () => {
                                 <p className="font-bold">Category: {classCard?.category}</p>
                                 <p>{classCard?.description}</p>
                                 <p className="font-medium">Price: ${classCard?.price}</p>
+                                <p className="font-medium">Total Enrollment: {classCard?.enrolment}</p>
                                 <div className="flex justify-start items-center gap-2">
                                     <div className="w-16 h-16 rounded-full">
                                         <img src={classCard?.teacher_photo} alt="" className="h-full w-full rounded-full object-cover" />
@@ -33,8 +33,8 @@ const AllClasses = () => {
                                     </div>
                                 </div>
                                 <div className="card-actions justify-start mt-3">
-                                    <Link to={`/details/${classCard?._id}`}>
-                                        <button className="btn btn-secondary text-white font-bold">Course Details</button>
+                                    <Link to={`/class-details/${classCard?._id}`}>
+                                        <button className="btn btn-secondary text-white font-bold">Enroll</button>
                                     </Link>
                                 </div>
                             </div>
