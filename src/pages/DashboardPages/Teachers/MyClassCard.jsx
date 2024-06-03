@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const MyClassCard = ({ course, handleDeleteItem }) => {
-    const { _id, title, photo, description, category, price, teacher_photo, teacher_email, teacher_name } = course;
+    const { _id, title, photo, description, category, price, teacher_photo, teacher_email, teacher_name, status } = course;
     return (
         <div className="card card-side bg-base-100 shadow-xl flex flex-col md:flex-row">
             <img src={photo} alt="" className="w-full md:w-1/3" />
@@ -20,7 +20,7 @@ const MyClassCard = ({ course, handleDeleteItem }) => {
                     </div>
                 </div>
                 <div className="card-actions justify-center mt-3">
-                    <button disabled className="btn btn-secondary text-white font-bold">See Details</button>
+                    <button disabled={status === 'Pending'} className="btn btn-secondary text-white font-bold">See Details</button>
                     <button className="btn bg-green-500 text-white font-bold">Update</button>
                     <button onClick={()=> handleDeleteItem(_id)} className="btn bg-red-500 text-white font-bold">Delete</button>
                 </div>

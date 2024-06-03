@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
-import useAllClass from "../../hooks/useAllClass";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const AllClasses = () => {
 
-    const [classes, isLoading] = useAllClass()
+    const axiosPublic = useAxiosPublic()
+
+    const { data: classes = [], isLoading } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/all-classes/accepted')
+            return res.data
+        }
+    })
+
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>

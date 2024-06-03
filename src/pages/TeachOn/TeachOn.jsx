@@ -3,15 +3,18 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import useRole from "../../hooks/useRole";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const TeachOn = () => {
 
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
     const axiosSecure = useAxiosSecure()
+    const [role, isLoading] = useRole()
 
     const { mutateAsync } = useMutation({
         mutationFn: async teacherData => {
-            const {data} = await axiosSecure.put('/apply-teach', teacherData)
+            const { data } = await axiosSecure.put('/apply-teach', teacherData)
             return data
         },
         onSuccess: () => {
@@ -23,12 +26,25 @@ const TeachOn = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm()
 
     const onSubmit = async (data) => {
-        try{
+        try {
             await mutateAsync({ ...data, status: 'Pending', role: 'Student', photo: user?.photoURL })
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
+    }
+
+    if(loading || isLoading){
+        return <LoadingSpinner></LoadingSpinner>
+    }
+
+    if (role === 'Teacher') {
+        return (
+            <div className="min-h-[calc(100vh-184px)] pb-5 pt-20 max-w-7xl mx-auto lg:flex justify-center items-center gap-10">
+                <h3 className="text-3xl font-bold text-center">
+                    You are a teacher at StudyHive</h3>
+            </div>
+        )
     }
 
     return (
