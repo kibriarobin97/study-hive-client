@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ClassDetails = () => {
 
     const { id } = useParams()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
 
     const { data: classes = {}, isLoading } = useQuery({
         queryKey: ['classes', id],
         queryFn: async () => {
-            const { data } = await axiosPublic.get(`/classes/${id}`)
+            const { data } = await axiosSecure.get(`/classes/${id}`)
             return data
         },
     })

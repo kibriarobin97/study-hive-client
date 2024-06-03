@@ -14,6 +14,7 @@ import MyEnrollClass from "../pages/DashboardPages/Students/MyEnrollClass";
 import AllClassesAdmin from "../pages/DashboardPages/Admin/AllClassesAdmin";
 import TeacherRequest from "../pages/DashboardPages/Admin/TeacherRequest";
 import AllUser from "../pages/DashboardPages/Admin/AllUser";
+import UpdateClasses from "../pages/DashboardPages/Teachers/UpdateClasses";
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path: 'my-class',
                 element: <MyClass></MyClass>
+            },
+            {
+                path: 'update-classes/:id',
+                element: <UpdateClasses></UpdateClasses>
             },
 
             // student route

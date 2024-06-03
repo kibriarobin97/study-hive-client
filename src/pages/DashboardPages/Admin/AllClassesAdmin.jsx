@@ -15,7 +15,7 @@ const AllClassesAdmin = () => {
                 console.log(res.data)
                 if (res.data?.modifiedCount > 0) {
                     refetch()
-                    toast.success(`class is accepted`)
+                    toast.success(`class is approved`)
                 }
             })
     }

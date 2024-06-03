@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const MyClassCard = ({ course, handleDeleteItem }) => {
     const { _id, title, photo, description, category, price, teacher_photo, teacher_email, teacher_name, status } = course;
@@ -20,9 +21,11 @@ const MyClassCard = ({ course, handleDeleteItem }) => {
                     </div>
                 </div>
                 <div className="card-actions justify-center mt-3">
-                    <button disabled={status === 'Pending'} className="btn btn-secondary text-white font-bold">See Details</button>
-                    <button className="btn bg-green-500 text-white font-bold">Update</button>
-                    <button onClick={()=> handleDeleteItem(_id)} className="btn bg-red-500 text-white font-bold">Delete</button>
+                    <button disabled={status !== 'Accepted'} className="btn btn-secondary text-white font-bold">See Details</button>
+                    <Link to={`/dashboard/update-classes/${_id}`}>
+                        <button className="btn bg-green-500 text-white font-bold">Update</button>
+                    </Link>
+                    <button onClick={() => handleDeleteItem(_id)} className="btn bg-red-500 text-white font-bold">Delete</button>
                 </div>
             </div>
         </div>
@@ -30,7 +33,7 @@ const MyClassCard = ({ course, handleDeleteItem }) => {
 };
 
 
-MyClassCard.propTypes ={
+MyClassCard.propTypes = {
     course: PropTypes.object,
     handleDeleteItem: PropTypes.func,
 }
