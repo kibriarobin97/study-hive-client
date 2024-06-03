@@ -9,9 +9,9 @@ const TeachOn = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
-    const { mutateAsync, isSuccess } = useMutation({
+    const { mutateAsync, } = useMutation({
         mutationFn: async teacherData => {
-            const {data} = await axiosSecure.put('/user', teacherData)
+            const {data} = await axiosSecure.put('/apply-teach', teacherData)
             return data
         },
         onSuccess: () => {
@@ -24,7 +24,7 @@ const TeachOn = () => {
 
     const onSubmit = async (data) => {
         try{
-            await mutateAsync({ ...data, status: 'Pending' })
+            await mutateAsync({ ...data, status: 'Pending', role: 'Student', photo: user?.photoURL })
         }
         catch(err){
             console.log(err)
@@ -76,9 +76,10 @@ const TeachOn = () => {
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
-                            {
+                            {/* {
                                 isSuccess ? <input className="btn btn-secondary cursor-pointer text-center font-bold rounded-md text-white" type="submit" value="Submit for Review" /> : <button disabled className="btn btn-secondary">Submitted</button>
-                            }
+                            } */}
+                            <input className="btn btn-secondary cursor-pointer text-center font-bold rounded-md text-white" type="submit" value="Submit for Review" />
                         </div>
                     </form>
                 </div>
