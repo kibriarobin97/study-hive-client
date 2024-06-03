@@ -9,7 +9,7 @@ const TeachOn = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
-    const { mutateAsync, } = useMutation({
+    const { mutateAsync } = useMutation({
         mutationFn: async teacherData => {
             const {data} = await axiosSecure.put('/apply-teach', teacherData)
             return data

@@ -10,12 +10,18 @@ import MenuItem from './Menu/MenuItem'
 import TeacherMenu from './Menu/TeacherMenu';
 import StudentMenu from './Menu/StudentMenu';
 import AdminMenu from './Menu/AdminMenu';
+import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 
 const Sidebar = () => {
     const { logOut } = useAuth()
     const [isActive, setActive] = useState(false)
-    const [role] = useRole()
+    const [role, isLoading] = useRole()
     console.log(role)
+
+    if(isLoading){
+        return <LoadingSpinner></LoadingSpinner>
+    }
+
     // Sidebar Responsive Handler
     const handleToggle = () => {
         setActive(!isActive)

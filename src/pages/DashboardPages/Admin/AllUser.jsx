@@ -71,6 +71,7 @@ const AllUser = () => {
                                 <th><p className="uppercase text-white">Image</p></th>
                                 <th><p className="uppercase text-white">Name</p></th>
                                 <th><p className="uppercase text-white">Email</p></th>
+                                <th><p className="uppercase text-white">Role</p></th>
                                 <th><p className="uppercase text-white">Status</p></th>
                                 <th><p className="uppercase text-white">Action</p></th>
                             </tr>
@@ -92,6 +93,9 @@ const AllUser = () => {
                                     </td>
                                     <td>
                                         {user?.email}
+                                    </td>
+                                    <td>
+                                        {user?.role}
                                     </td>
                                     <td>
                                         {

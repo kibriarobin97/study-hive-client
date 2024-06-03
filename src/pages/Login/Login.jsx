@@ -41,7 +41,8 @@ const Login = () => {
                     name: result.user?.displayName,
                     email: result.user?.email,
                     photo: result.user?.photoURL,
-                    role: 'Student'
+                    role: 'Student',
+                    status: 'Pending'
                 }
                 axiosPublic.put('/user', userInfo)
                     .then(res => {

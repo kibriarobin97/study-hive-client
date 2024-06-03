@@ -15,9 +15,10 @@ const TeacherRequest = () => {
     })
 
     const handleAccept = user => {
-        axiosSecure.patch(`/apply-teach/${user?._id}`)
+        axiosSecure.patch(`/apply-teach/${user?._id}/${user?.email}`)
             .then(res => {
-                if (res.data.modifiedCount > 0) {
+                console.log(res.data)
+                if (res.data?.result?.modifiedCount > 0) {
                     refetch()
                     toast.success(`${user?.name} is teacher now!`)
                 }
@@ -25,9 +26,9 @@ const TeacherRequest = () => {
     }
 
     const handleReject = user => {
-        axiosSecure.patch(`/reject-teach/${user?._id}`)
+        axiosSecure.patch(`/reject-teach/${user?._id}/${user?.email}`)
             .then(res => {
-                if (res.data.modifiedCount > 0) {
+                if (res.data?.result?.modifiedCount > 0) {
                     refetch()
                     toast.success(`${user?.name} teacher request is rejected`)
                 }
