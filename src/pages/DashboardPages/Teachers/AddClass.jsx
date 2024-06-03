@@ -35,9 +35,10 @@ const AddClass = () => {
         const teacher_name= user?.displayName;
         const teacher_email = user?.email;
         const teacher_photo = user?.photoURL;
+        const enrolment = 0;
 
         try{
-            const classInfo = {title, category, price, status, photo, description, teacher_name, teacher_email, teacher_photo}
+            const classInfo = {title, category, price, status, photo, description, teacher_name, teacher_email, teacher_photo, enrolment}
 
             await mutateAsync(classInfo)
         }
