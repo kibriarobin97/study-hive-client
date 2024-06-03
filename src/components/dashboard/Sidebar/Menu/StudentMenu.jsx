@@ -1,9 +1,13 @@
+import { FaAddressBook } from "react-icons/fa";
+import MenuItem from "./MenuItem";
 
 const StudentMenu = () => {
     return (
-        <div>
-            <h3>Student menu</h3>
-        </div>
+        <MenuItem
+            label='My Enroll Class'
+            address='my-enroll-class'
+            icon={FaAddressBook}
+        ></MenuItem>
     );
 };
 
