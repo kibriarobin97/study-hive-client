@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ classes }) => {
 
-    const { _id, price, title, category, photo, teacher_email } = classes;
+    const { _id, price, title, category, photo, teacher_email, teacher_name } = classes;
 
     const axiosSecure = useAxiosSecure()
     const [clientSecret, setClientSecret] = useState('')
@@ -90,6 +90,7 @@ const CheckoutForm = ({ classes }) => {
                     category,
                     photo,
                     teacher_email,
+                    teacher_name,
                     transactionId: paymentIntent?.id
                 }
 

@@ -45,11 +45,7 @@ const MyClass = () => {
                 }
             }
         });
-    }
-
-    // const handleUpdate = async (id) => {
-    //     console.log(id)
-    // }
+    } 
 
     if(isLoading){
         return <LoadingSpinner></LoadingSpinner>
