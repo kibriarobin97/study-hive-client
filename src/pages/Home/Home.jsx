@@ -1,3 +1,4 @@
+import Addmission from "../../components/Addmission/Addmission";
 import Banner from "../../components/Banner/Banner";
 import Features from "../../components/Features/Features";
 import Instructor from "../../components/Instructor/Instructor";
@@ -12,6 +13,7 @@ const Home = () => {
             <Instructor></Instructor>
             <Features></Features>
             <Review></Review>
+            <Addmission></Addmission>
         </div>
     );
 };
