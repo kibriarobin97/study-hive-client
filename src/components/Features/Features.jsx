@@ -18,7 +18,7 @@ const Features = () => {
                 <div className="bg-[#F9F9FF] p-5 space-y-2 rounded-md hover:scale-[1.05] transition-all">
                     <img src={online} alt="" className="w-16 h-16"/>
                     <h3 className="text-xl font-bold">Sell Online Course</h3>
-                    <p className="text-gray-400">Enjoy a flexible learning experience with online modules that fit your schedule, allowing you to study from anywhere in the world.</p>
+                    <p className="text-gray-400">Enjoy a flexible learning experience with online modules that allowing you to study from anywhere in the world.</p>
                 </div>
                 <div className="bg-[#F9F9FF] p-5 space-y-2 rounded-md hover:scale-[1.05] transition-all">
                     <img src={certification} alt="" className="w-16 h-16"/>
