@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const CheckoutForm = ({ classes }) => {
 
@@ -27,7 +28,7 @@ const CheckoutForm = ({ classes }) => {
 
     const { mutateAsync } = useMutation({
         mutationFn: async classData => {
-            const {data} = await axiosSecure.post('/enroll-class', classData)
+            const {data} = await axiosSecure.put(`/enroll-class/${_id}`, classData)
             return data
         },
         onSuccess: () => {
@@ -127,5 +128,9 @@ const CheckoutForm = ({ classes }) => {
 
     );
 };
+
+CheckoutForm.propTypes = {
+    classes: PropTypes.object
+}
 
 export default CheckoutForm;

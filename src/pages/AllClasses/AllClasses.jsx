@@ -15,7 +15,6 @@ const AllClasses = () => {
         }
     })
 
-
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }

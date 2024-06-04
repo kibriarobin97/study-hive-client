@@ -21,7 +21,9 @@ const MyClassCard = ({ course, handleDeleteItem }) => {
                     </div>
                 </div>
                 <div className="card-actions justify-center mt-3">
-                    <button disabled={status !== 'Accepted'} className="btn btn-secondary text-white font-bold">See Details</button>
+                    <Link to={`/dashboard/my-class-details/${_id}`}>
+                        <button disabled={status !== 'Accepted'} className="btn btn-secondary text-white font-bold">See Details</button>
+                    </Link>
                     <Link to={`/dashboard/update-classes/${_id}`}>
                         <button className="btn bg-green-500 text-white font-bold">Update</button>
                     </Link>
