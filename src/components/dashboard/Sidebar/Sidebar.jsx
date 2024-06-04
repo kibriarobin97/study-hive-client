@@ -18,7 +18,7 @@ const Sidebar = () => {
     const [role, isLoading] = useRole()
     console.log(role)
 
-    if(isLoading){
+    if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
@@ -72,16 +72,17 @@ const Sidebar = () => {
                         {/*  Menu Items */}
                         <nav>
 
-                            {role === 'Student' && <StudentMenu></StudentMenu>}
-                            {role === 'Teacher' && <TeacherMenu></TeacherMenu>}
-                            {role === 'Admin' && <AdminMenu></AdminMenu>}
-
-                             <MenuItem
+                            <MenuItem
                                 label='Profile'
                                 address='/dashboard'
                                 icon={CgProfile}
                             ></MenuItem>
-                            
+
+                            {role === 'Student' && <StudentMenu></StudentMenu>}
+                            {role === 'Teacher' && <TeacherMenu></TeacherMenu>}
+                            {role === 'Admin' && <AdminMenu></AdminMenu>}
+
+
                             <button
                                 onClick={logOut}
                                 className='flex w-full items-center px-4 py-2 mt-5 text-gray-700 hover:bg-gray-300   hover:text-black transition-colors duration-300 transform'
