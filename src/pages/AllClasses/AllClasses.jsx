@@ -8,7 +8,7 @@ const AllClasses = () => {
     const axiosPublic = useAxiosPublic()
 
     const { data: classes = [], isLoading } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['classes'],
         queryFn: async () => {
             const res = await axiosPublic.get('/all-classes/accepted')
             return res.data

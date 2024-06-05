@@ -20,7 +20,7 @@ const Review = () => {
     })
 
     return (
-        <section className='pt-10'>
+        <section className=''>
             <div>
                 <h3 className='text-3xl font-bold text-center'>Reviews</h3>
             </div>
