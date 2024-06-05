@@ -2,10 +2,11 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
 import useAllClass from "../../../hooks/useAllClass";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const AllClassesAdmin = () => {
 
-    const [classes, isLoading, refetch] = useAllClass()
+    const [classesAll, isLoading, refetch] = useAllClass()
 
     const axiosSecure = useAxiosSecure()
 
@@ -40,7 +41,7 @@ const AllClassesAdmin = () => {
                 <title>All-User | Taste-Trove</title>
             </Helmet> */}
             <div className="text-center flex justify-evenly items-center">
-                <h2 className="lg:text-2xl text-xl font-semibold">Total Class: {classes.length}</h2>
+                <h2 className="lg:text-2xl text-xl font-semibold">Total Class: {classesAll.length}</h2>
             </div>
             <div>
                 <div className="overflow-x-auto mt-8">
@@ -62,7 +63,7 @@ const AllClassesAdmin = () => {
                         <tbody>
                             {/* row 1 */}
                             {
-                                classes.map((classTable, idx) => <tr key={classTable._id}>
+                                classesAll?.map((classTable, idx) => <tr key={classTable._id}>
                                     <th>
                                         {idx + 1}
                                     </th>
@@ -84,9 +85,12 @@ const AllClassesAdmin = () => {
                                         {classTable?.status}
                                     </td>
                                     <td>
-                                        <button
-                                            disabled={classTable?.status !== 'Accepted'}
-                                            className="btn btn-secondary btn-sm">See progress</button>
+                                        <Link to={`/dashboard/see-review/${classTable?._id}`}>
+                                            <button
+                                                disabled={classTable?.status !== 'Accepted'}
+                                                className="btn btn-secondary btn-sm">See progress
+                                            </button>
+                                        </Link>
                                     </td>
                                     <td>
                                         <button

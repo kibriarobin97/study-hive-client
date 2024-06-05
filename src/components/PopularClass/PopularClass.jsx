@@ -55,7 +55,7 @@ const PopularClass = () => {
                         </div>
                         <div className="text-center space-y-2 mt-5">
                             <p className="font-medium">Teacher Name: {course?.teacher_name}</p>
-                            <p className="font-medium">Teacher Name: {course?.teacher_email}</p>
+                            <p className="font-medium">Teacher Email: {course?.teacher_email}</p>
                         </div>
                     </SwiperSlide>)
                 }

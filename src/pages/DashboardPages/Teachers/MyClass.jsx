@@ -11,7 +11,7 @@ const MyClass = () => {
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
 
-    const { data: classes, isLoading, refetch } = useQuery({
+    const { data: myClasses, isLoading, refetch } = useQuery({
         queryKey: ['classes', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
@@ -19,10 +19,6 @@ const MyClass = () => {
             return data
         }
     })
-
-    if(!classes.length){
-        return <h3 className="text-3xl font-bold text-center mt-20">You have no added class</h3>
-    }
 
     const handleDeleteItem = async (id) => {
         Swal.fire({
@@ -54,13 +50,16 @@ const MyClass = () => {
     if(isLoading){
         return <LoadingSpinner></LoadingSpinner>
     }
+    if(!myClasses?.length){
+        return <h3 className="text-3xl font-bold text-center mt-20">You have no added class</h3>
+    }
 
     return (
         <div>
             <h3 className="text-3xl font-medium text-center mb-8">My Classes</h3>
             <div className="p-5 space-y-5">
                 {
-                    classes?.map(course => <MyClassCard
+                    myClasses?.map(course => <MyClassCard
                         key={course?._id}
                         course={course}
                         handleDeleteItem={handleDeleteItem}

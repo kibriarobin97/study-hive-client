@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import FeedbackModal from "../../../components/Modal/FeedbackModal";
 import { useParams } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
@@ -11,7 +10,6 @@ const Assignment = () => {
 
     const [isOpen, setIsOpen] = useState(false)
     const axiosSecure = useAxiosSecure()
-    const { user } = useAuth()
     const { id } = useParams()
 
     const closeModal = () => {
@@ -21,8 +19,7 @@ const Assignment = () => {
     
 
     const { data: classes = {} } = useQuery({
-        queryKey: ['classes', user?.email],
-        enabled: !!user?.email,
+        queryKey: ['classes'],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/enroll-class/${id}`)
             return data

@@ -18,6 +18,7 @@ import UpdateClasses from "../pages/DashboardPages/Teachers/UpdateClasses";
 import Payment from "../pages/Payment/Payment";
 import MyClassDetails from "../pages/DashboardPages/Teachers/MyClassDetails";
 import Assignment from "../pages/DashboardPages/Students/Assignment";
+import SeeReview from "../pages/DashboardPages/Admin/SeeReview";
 
 
 const router = createBrowserRouter([
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
             {
                 path: 'all-users',
                 element: <AllUser></AllUser>
+            },
+            {
+                path: 'see-review/:id',
+                element: <SeeReview></SeeReview>
             }
         ]
     }
