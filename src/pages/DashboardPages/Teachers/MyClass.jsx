@@ -20,6 +20,10 @@ const MyClass = () => {
         }
     })
 
+    if(!classes.length){
+        return <h3 className="text-3xl font-bold text-center mt-20">You have no added class</h3>
+    }
+
     const handleDeleteItem = async (id) => {
         Swal.fire({
             title: "Are you sure?",

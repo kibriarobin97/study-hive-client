@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import icon from "../../assets/teaching/Vector.png"
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
+import ReactStars from "react-rating-stars-component";
 
 const Review = () => {
 
@@ -18,6 +19,7 @@ const Review = () => {
         return res.data
         }
     })
+    console.log(reviews)
 
     return (
         <section className=''>
@@ -36,11 +38,19 @@ const Review = () => {
                                 <img src={icon} alt="" className="h-8" />
                                 <img src={icon} alt="" className="h-8" />
                             </div>
-                            <p>{review?.details}</p>
+                            <p className='font-semibold text-xl'>{review?.title}</p>
+                            <p>{review?.description}</p>
+                            <ReactStars
+                                count={5} 
+                                size={24}
+                                value={review?.ratings}
+                                activeColor="#ffd700"
+                                edit={false}
+                            />
                             <div className='w-20 h-20 rounded-full'>
-                                <img src={review?.photo} alt="" className='w-full h-full object-cover rounded-full'/>
+                                <img src={review?.userPhoto} alt="" className='w-full h-full object-cover rounded-full'/>
                             </div>
-                            <h3 className="text-2xl font-medium text-[#CD9003]">{review?.name}</h3>
+                            <h3 className="text-2xl font-medium text-[#CD9003]">{review?.userName}</h3>
                         </div>
                     </SwiperSlide>)
                 }

@@ -17,6 +17,7 @@ import AllUser from "../pages/DashboardPages/Admin/AllUser";
 import UpdateClasses from "../pages/DashboardPages/Teachers/UpdateClasses";
 import Payment from "../pages/Payment/Payment";
 import MyClassDetails from "../pages/DashboardPages/Teachers/MyClassDetails";
+import Assignment from "../pages/DashboardPages/Students/Assignment";
 
 
 const router = createBrowserRouter([
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
             {
                 path: 'my-enroll-class',
                 element: <MyEnrollClass></MyEnrollClass>
+            },
+            {
+                path: 'assignment/:id',
+                element: <Assignment></Assignment>
             },
 
             // admin route

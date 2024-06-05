@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const MyEnrollClass = () => {
 
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
 
-    const { data: classes, isLoading } = useQuery({
-        queryKey: ['classes', user?.email],
+    const { data: MyClasses, isLoading } = useQuery({
+        queryKey: ['MyClasses', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/my-enroll-class/${user?.email}`)
@@ -17,7 +18,7 @@ const MyEnrollClass = () => {
         }
     })
 
-    console.log(classes)
+    console.log(MyClasses)
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
@@ -28,7 +29,7 @@ const MyEnrollClass = () => {
             <h3 className="text-2xl font-bold text-center my-5">My Enroll Class</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {
-                    classes?.map(classCard => <div key={classCard?._id}>
+                    MyClasses?.map(classCard => <div key={classCard?._id}>
                         <div className="card bg-base-100 shadow-xl">
                             <figure className="px-10 pt-10">
                                 <img src={classCard?.photo} alt="" className="rounded-xl object-cover" />
@@ -38,7 +39,9 @@ const MyEnrollClass = () => {
                                 <p className="font-semibold">Category: {classCard?.category}</p>
                                 <p className="font-semibold">Teacher Name: {classCard?.teacher_name}</p>
                                 <div className="">
-                                    <button className="btn btn-secondary font-bold">Continue</button>
+                                    <Link to={`/dashboard/assignment/${classCard?._id}`}>
+                                        <button className="btn btn-secondary font-bold">Continue</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useRole from "../../hooks/useRole";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
@@ -11,6 +11,17 @@ const TeachOn = () => {
     const { user, loading } = useAuth()
     const axiosSecure = useAxiosSecure()
     const [role, isLoading] = useRole()
+
+    const { data: users = []} = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users')
+            return res.data
+        }
+    })
+
+    const status = users.map(user => user?.status)
+    console.log(status)
 
     const { mutateAsync } = useMutation({
         mutationFn: async teacherData => {
@@ -92,10 +103,10 @@ const TeachOn = () => {
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
-                            {/* {
-                                isSuccess ? <input className="btn btn-secondary cursor-pointer text-center font-bold rounded-md text-white" type="submit" value="Submit for Review" /> : <button disabled className="btn btn-secondary">Submitted</button>
-                            } */}
-                            <input className="btn btn-secondary cursor-pointer text-center font-bold rounded-md text-white" type="submit" value="Submit for Review" />
+                            {
+                                status[3] === 'Rejected' ? <input className="btn btn-secondary cursor-pointer text-center font-bold rounded-md text-white" type="submit" value="Request to Another" /> :
+                                <input className="btn btn-secondary cursor-pointer text-center font-bold rounded-md text-white" type="submit" value="Submit for Review" />
+                            }
                         </div>
                     </form>
                 </div>
