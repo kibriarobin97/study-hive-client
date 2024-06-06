@@ -4,14 +4,17 @@ import defaultProfile from "../../assets/teaching/user.png"
 
 const NavBar = () => {
 
+    const { user, logOut } = useAuth()
+
     const navLinks = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/all-classes'>All Classes</Link></li>
-        <li><Link to='/teach'>Teach on Study Hive</Link></li>
+        {
+            user && <li><Link to='/teach'>Teach on Study Hive</Link></li>
+        }
     </>
 
-    const { user, logOut } = useAuth()
-
+    
     const handleLogOut = () => {
         logOut()
             .then(() => console.log('log out'))
