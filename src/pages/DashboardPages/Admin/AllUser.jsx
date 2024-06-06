@@ -99,7 +99,7 @@ const AllUser = () => {
                                     </td>
                                     <td>
                                         {
-                                            user.role === 'Admin' ? 'Admin' :
+                                            user.role === 'Admin' ? 'Verified' :
                                                 <button
                                                     onClick={() => handleMakeAdmin(user)}
                                                     className="btn bg-[#D1A054] btn-sm text-white">Make Admin

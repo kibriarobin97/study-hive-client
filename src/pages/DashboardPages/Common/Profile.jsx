@@ -6,7 +6,7 @@ const Profile = () => {
 
     const { user, loading } = useAuth()
     const [role, isLoading] = useRole()
-    console.log(user?.photoURL)
+    console.log(role)
 
     if(loading || isLoading){
         return <LoadingSpinner></LoadingSpinner>

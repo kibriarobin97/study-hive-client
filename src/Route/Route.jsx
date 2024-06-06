@@ -19,6 +19,9 @@ import Payment from "../pages/Payment/Payment";
 import MyClassDetails from "../pages/DashboardPages/Teachers/MyClassDetails";
 import Assignment from "../pages/DashboardPages/Students/Assignment";
 import SeeReview from "../pages/DashboardPages/Admin/SeeReview";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
+import TeacherRoute from "./TeacherRoute";
 
 
 const router = createBrowserRouter([
@@ -36,11 +39,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/class-details/:id',
-                element: <ClassDetails></ClassDetails>
+                element: <PrivateRoute><ClassDetails></ClassDetails></PrivateRoute>
             },
             {
                 path: '/teach',
-                element: <TeachOn></TeachOn>
+                element: <PrivateRoute><TeachOn></TeachOn></PrivateRoute>
             },
             {
                 path: '/login',
@@ -52,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/payment/:id',
-                element: <Payment></Payment>
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
             }
         ]
     },
@@ -62,53 +65,53 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Profile></Profile>
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>
             },
 
             // teacher route
             {
                 path: 'add-class',
-                element: <AddClass></AddClass>
+                element: <TeacherRoute><AddClass></AddClass></TeacherRoute>
             },
             {
                 path: 'my-class',
-                element: <MyClass></MyClass>
+                element: <TeacherRoute><MyClass></MyClass></TeacherRoute>
             },
             {
                 path: 'update-classes/:id',
-                element: <UpdateClasses></UpdateClasses>
+                element: <TeacherRoute><UpdateClasses></UpdateClasses></TeacherRoute>
             },
             {
                 path: 'my-class-details/:id',
-                element: <MyClassDetails></MyClassDetails>
+                element: <TeacherRoute><MyClassDetails></MyClassDetails></TeacherRoute>
             },
 
             // student route
             {
                 path: 'my-enroll-class',
-                element: <MyEnrollClass></MyEnrollClass>
+                element: <PrivateRoute><MyEnrollClass></MyEnrollClass></PrivateRoute>
             },
             {
                 path: 'assignment/:id',
-                element: <Assignment></Assignment>
+                element: <PrivateRoute><Assignment></Assignment></PrivateRoute>
             },
 
             // admin route
             {
                 path: 'all-classes-admin',
-                element: <AllClassesAdmin></AllClassesAdmin>
+                element: <AdminRoute><AllClassesAdmin></AllClassesAdmin></AdminRoute>
             },
             {
                 path: 'teacher-request',
-                element: <TeacherRequest></TeacherRequest>
+                element: <AdminRoute><TeacherRequest></TeacherRequest></AdminRoute>
             },
             {
                 path: 'all-users',
-                element: <AllUser></AllUser>
+                element: <AdminRoute><AllUser></AllUser></AdminRoute>
             },
             {
                 path: 'see-review/:id',
-                element: <SeeReview></SeeReview>
+                element: <AdminRoute><SeeReview></SeeReview></AdminRoute>
             }
         ]
     }
