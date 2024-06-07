@@ -3,11 +3,14 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
 import { IoCreateOutline } from "react-icons/io5";
+import { useState } from "react";
+import AssignmentModal from "../../../components/Modal/AssignmentModal";
 
 const MyClassDetails = () => {
 
     const { id } = useParams()
     const axiosSecure = useAxiosSecure()
+    const [isOpen, setIsOpen] = useState(false)
 
     const { data: classes = {}, isLoading } = useQuery({
         queryKey: ['classes', id],
@@ -19,6 +22,9 @@ const MyClassDetails = () => {
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
+    }
+    const closeModal = () => {
+        setIsOpen(false)
     }
 
     return (
@@ -42,8 +48,15 @@ const MyClassDetails = () => {
                     </div>
                 </div>
                 <div className="my-5">
-                    <button className="btn btn-error text-white font-bold">Create Assignment <IoCreateOutline className="text-xl"/></button>
+                    <button 
+                    onClick={() => setIsOpen(true)}
+                    className="btn btn-error text-white font-bold">Create Assignment <IoCreateOutline className="text-xl"/></button>
                 </div>
+                <AssignmentModal
+                isOpen={isOpen}
+                classes={classes}
+                closeModal={closeModal}
+            ></AssignmentModal>
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import FeedbackModal from "../../../components/Modal/FeedbackModal";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
 
 
 const Assignment = () => {
@@ -16,7 +17,13 @@ const Assignment = () => {
         setIsOpen(false)
     }
 
-    
+    const { data: assignments = [], isLoading} = useQuery({
+        queryKey: ['assignments'],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/assignment/${classes?.classId}`)
+            return data
+        }
+    })
 
     const { data: classes = {} } = useQuery({
         queryKey: ['classes'],
@@ -25,7 +32,11 @@ const Assignment = () => {
             return data
         }
     })
-    console.log(classes)
+
+    if(isLoading){
+        return <LoadingSpinner></LoadingSpinner>
+    }
+
 
     return (
         <div className="mx-10">
@@ -43,7 +54,7 @@ const Assignment = () => {
                 closeModal={closeModal}
             ></FeedbackModal>
             <div className="text-center flex justify-evenly items-center">
-                <h2 className="lg:text-2xl text-xl font-semibold">Total Assignment:</h2>
+                <h2 className="lg:text-2xl text-xl font-semibold">Total Assignment: {assignments?.length}</h2>
             </div>
             <div>
                 <div className="overflow-x-auto mt-8">
@@ -53,45 +64,36 @@ const Assignment = () => {
                             <tr className="bg-secondary">
                                 <th><p className="text-white">#</p></th>
                                 <th><p className="uppercase text-white">Title</p></th>
-                                <th><p className="uppercase text-white">Category</p></th>
+                                <th><p className="uppercase text-white">description</p></th>
                                 <th><p className="uppercase text-white">Deadline</p></th>
                                 <th><p className="uppercase text-white">Action</p></th>
                             </tr>
                         </thead>
-                        {/* <tbody>
+                        <tbody>
                             {
-                                teachers.map((user, idx) => <tr key={user._id}>
+                                assignments?.map((assignment, idx) => <tr key={assignment._id}>
                                     <th>
                                         {idx + 1}
                                     </th>
                                     <td>
-                                        <div className="w-12 h-12 rounded-full">
-                                            <img src={user?.photo} alt="" className="rounded-full w-full h-full object-cover" />
-                                        </div>
+                                        {assignment?.assignmentTitle}
                                     </td>
                                     <td>
-                                        {user?.name}
+                                        {assignment?.description}
                                     </td>
                                     <td>
-                                        {user?.category}
-                                    </td>
-                                    <td>
-                                        {user?.experience}
-                                    </td>
-                                    <td>
-                                        {user?.status}
+                                        {assignment?.deadline}
                                     </td>
                                     <td>
                                         <button
-                                            // onClick={() => handleAccept(user)}
-                                            disabled={user?.status !== 'Pending'}
+                                            disabled={assignment?.status !== 'Pending'}
                                             className="btn btn-success btn-sm text-white">
-                                            Accept
+                                            Submit
                                         </button>
                                     </td>
                                 </tr>)
                             }
-                        </tbody> */}
+                        </tbody>
                     </table>
                 </div>
             </div>
