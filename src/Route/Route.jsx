@@ -22,12 +22,14 @@ import SeeReview from "../pages/DashboardPages/Admin/SeeReview";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import TeacherRoute from "./TeacherRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Root></Root>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
