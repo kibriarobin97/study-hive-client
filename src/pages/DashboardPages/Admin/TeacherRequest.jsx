@@ -17,7 +17,6 @@ const TeacherRequest = () => {
     const handleAccept = user => {
         axiosSecure.patch(`/apply-teach/${user?._id}/${user?.email}`)
             .then(res => {
-                console.log(res.data)
                 if (res.data?.result?.modifiedCount > 0) {
                     refetch()
                     toast.success(`${user?.name} is teacher now!`)

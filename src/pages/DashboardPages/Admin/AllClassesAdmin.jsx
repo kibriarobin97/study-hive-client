@@ -13,7 +13,6 @@ const AllClassesAdmin = () => {
     const handleAccept = id => {
         axiosSecure.patch(`/classes-accept/${id}`)
             .then(res => {
-                console.log(res.data)
                 if (res.data?.modifiedCount > 0) {
                     refetch()
                     toast.success(`class is approved`)

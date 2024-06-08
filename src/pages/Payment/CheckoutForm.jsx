@@ -21,7 +21,6 @@ const CheckoutForm = ({ classes }) => {
     useEffect(() => {
         axiosSecure.post('/create-payment-intent', { price })
             .then(res => {
-                console.log(res.data.clientSecret)
                 setClientSecret(res.data.clientSecret)
             })
     }, [axiosSecure, price])
@@ -56,7 +55,6 @@ const CheckoutForm = ({ classes }) => {
         });
 
         if (error) {
-            console.log('payment error', error)
             toast.error(error.message)
         }
         else {
@@ -78,7 +76,6 @@ const CheckoutForm = ({ classes }) => {
             console.log(confirmError)
         }
         else{
-            console.log(paymentIntent)
             if(paymentIntent.status === 'succeeded'){
 
                 const paymentClass = {

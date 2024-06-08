@@ -19,7 +19,6 @@ const Review = () => {
         return res.data
         }
     })
-    console.log(reviews)
 
     return (
         <section className=''>

@@ -13,7 +13,7 @@ const MyClassDetails = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const { data: classes = {}, isLoading } = useQuery({
-        queryKey: ['classes', id],
+        queryKey: ['classes', id],  
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/teacher-stat/${id}`)
             return data

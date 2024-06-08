@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import useAuth from "../../hooks/useAuth";
 import defaultProfile from "../../assets/teaching/user.png"
+import logo from "../../assets/teaching/logo.jpeg"
 
 const NavBar = () => {
 
@@ -14,7 +15,7 @@ const NavBar = () => {
         }
     </>
 
-    
+
     const handleLogOut = () => {
         logOut()
             .then(() => console.log('log out'))
@@ -32,8 +33,12 @@ const NavBar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <div>
-                    <a className="btn btn-ghost text-xl font-bold">Study Hive</a>
+                <div className="flex">
+                    
+                    <Link to='/' className="btn btn-ghost text-xl font-bold">
+                        <img src={logo} alt="" className='h-6 w-6' />
+                        Study Hive
+                    </Link>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">

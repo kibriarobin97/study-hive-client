@@ -18,7 +18,6 @@ const MyEnrollClass = () => {
         }
     })
 
-    console.log(MyClasses)
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>

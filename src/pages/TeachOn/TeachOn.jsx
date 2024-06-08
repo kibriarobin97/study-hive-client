@@ -21,7 +21,6 @@ const TeachOn = () => {
     })
 
     const status = users?.map(user => user?.status)
-    console.log(status)
 
     const { mutateAsync } = useMutation({
         mutationFn: async teacherData => {

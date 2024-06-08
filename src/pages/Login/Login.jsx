@@ -20,7 +20,6 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
         loginUser(email, password)
             .then(result => {
                 console.log(result.user);
@@ -28,7 +27,6 @@ const Login = () => {
                 navigate(from, { replace: true })
             })
             .catch(error => {
-                console.log(error);
                 toast.error(error.message)
             })
     }
@@ -53,7 +51,6 @@ const Login = () => {
                     })
             })
             .catch(error => {
-                console.error(error)
                 toast.error(error.message)
             })
     }

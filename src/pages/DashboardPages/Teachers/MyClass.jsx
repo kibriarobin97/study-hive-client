@@ -32,7 +32,7 @@ const MyClass = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/my-classes/${id}`)
-                console.log(res.data)
+               
                 if (res.data.deletedCount > 0) {
                     refetch();
                     Swal.fire({

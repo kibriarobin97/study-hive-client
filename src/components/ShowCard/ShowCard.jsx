@@ -15,8 +15,6 @@ const ShowCard = () => {
         }
     })
 
-    console.log(stats)
-
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }

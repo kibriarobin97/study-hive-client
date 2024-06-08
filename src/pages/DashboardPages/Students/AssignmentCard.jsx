@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import SubmitAssignment from "./SubmitAssignment";
 
 const AssignmentCard = ({ classes }) => {
 
     const [assignments, setAssignments] = useState([])
 
-   console.log(assignments)
-   useEffect(() => {
+    useEffect(() => {
         fetch(`http://localhost:5000/assignment/${classes?.classId}`)
-        .then(res => res.json())
-        .then(data => setAssignments(data))
-   },[classes?.classId])
+            .then(res => res.json())
+            .then(data => setAssignments(data))
+    }, [classes?.classId])
 
+    
 
     return (
         <div>
@@ -33,27 +34,12 @@ const AssignmentCard = ({ classes }) => {
                         </thead>
                         <tbody>
                             {
-                                assignments?.map((assignment, idx) => <tr key={assignment._id}>
-                                    <td>
-                                        {idx + 1}
-                                    </td>
-                                    <td>
-                                        {assignment?.assignmentTitle}
-                                    </td>
-                                    <td>
-                                        {assignment?.description}
-                                    </td>
-                                    <td>
-                                        {assignment?.deadline}
-                                    </td>
-                                    <td>
-                                        <button
-                                            disabled={assignment?.status !== 'Pending'}
-                                            className="btn btn-success btn-sm text-white">
-                                            Submit
-                                        </button>
-                                    </td>
-                                </tr>)
+                                assignments?.map((assignment, idx) => <SubmitAssignment
+                                key={assignment?._id}
+                                assignment={assignment}
+                                idx={idx}
+                                classes={classes}
+                                ></SubmitAssignment>) 
                             }
                         </tbody>
                     </table>

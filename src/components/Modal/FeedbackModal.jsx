@@ -19,7 +19,6 @@ const FeedbackModal = ({ closeModal, isOpen, classes }) => {
 
     const ratingChanged = (newRating) => {
         setRating(newRating)
-        console.log(newRating)
     };
 
     const { mutateAsync } = useMutation({

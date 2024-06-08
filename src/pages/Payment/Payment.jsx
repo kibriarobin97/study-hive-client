@@ -20,7 +20,6 @@ const Payment = () => {
             return data
         },
     })
-    console.log(classes)
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
