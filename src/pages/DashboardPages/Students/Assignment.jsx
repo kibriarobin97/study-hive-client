@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
+import AssignmentCard from "./AssignmentCard";
 
 
 const Assignment = () => {
@@ -17,15 +18,8 @@ const Assignment = () => {
         setIsOpen(false)
     }
 
-    const { data: assignments = [], isLoading} = useQuery({
-        queryKey: ['assignments'],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get(`/assignment/${classes?.classId}`)
-            return data
-        }
-    })
-
-    const { data: classes = {} } = useQuery({
+    
+    const { data: classes = {}, isLoading } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/enroll-class/${id}`)
@@ -33,7 +27,7 @@ const Assignment = () => {
         }
     })
 
-    if(isLoading){
+    if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
@@ -53,49 +47,8 @@ const Assignment = () => {
                 classes={classes}
                 closeModal={closeModal}
             ></FeedbackModal>
-            <div className="text-center flex justify-evenly items-center">
-                <h2 className="lg:text-2xl text-xl font-semibold">Total Assignment: {assignments?.length}</h2>
-            </div>
             <div>
-                <div className="overflow-x-auto mt-8">
-                    <table className="table">
-                        {/* head */}
-                        <thead>
-                            <tr className="bg-secondary">
-                                <th><p className="text-white">#</p></th>
-                                <th><p className="uppercase text-white">Title</p></th>
-                                <th><p className="uppercase text-white">description</p></th>
-                                <th><p className="uppercase text-white">Deadline</p></th>
-                                <th><p className="uppercase text-white">Action</p></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                assignments?.map((assignment, idx) => <tr key={assignment._id}>
-                                    <th>
-                                        {idx + 1}
-                                    </th>
-                                    <td>
-                                        {assignment?.assignmentTitle}
-                                    </td>
-                                    <td>
-                                        {assignment?.description}
-                                    </td>
-                                    <td>
-                                        {assignment?.deadline}
-                                    </td>
-                                    <td>
-                                        <button
-                                            disabled={assignment?.status !== 'Pending'}
-                                            className="btn btn-success btn-sm text-white">
-                                            Submit
-                                        </button>
-                                    </td>
-                                </tr>)
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                <AssignmentCard classes={classes}></AssignmentCard>
             </div>
         </div>
     );
