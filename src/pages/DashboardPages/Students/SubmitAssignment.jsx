@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const SubmitAssignment = ({assignment, classes, idx, reload, setReload}) => {
 
-    const {_id, assignmentTitle, description, title, deadline, status, category} = assignment;
+    const {_id, assignmentTitle, description, title, deadline, category} = assignment;
 
     const axiosSecure = useAxiosSecure()
 
@@ -55,7 +55,6 @@ const SubmitAssignment = ({assignment, classes, idx, reload, setReload}) => {
             <td>
                 <button
                     onClick={() => handleSubmit(_id)}
-                    disabled={status !== 'Pending'}
                     className="btn btn-success btn-sm text-white">
                     Submit
                 </button>

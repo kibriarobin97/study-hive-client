@@ -8,7 +8,7 @@ const AssignmentCard = ({ classes }) => {
     const [reload, setReload] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/assignment/${classes?.classId}`)
+        fetch(`https://study-hive-server.vercel.app/assignment/${classes?.classId}`)
             .then(res => res.json())
             .then(data => setAssignments(data))
     }, [classes?.classId, reload])

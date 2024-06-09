@@ -13,7 +13,7 @@ const MyClassDetails = () => {
     const axiosSecure = useAxiosSecure()
     const [isOpen, setIsOpen] = useState(false)
 
-    const { data: classes = {}, isLoading } = useQuery({
+    const { data: classes = {}, isLoading, refetch } = useQuery({
         queryKey: ['classes', id],  
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/teacher-stat/${id}`)
@@ -26,6 +26,7 @@ const MyClassDetails = () => {
     }
     const closeModal = () => {
         setIsOpen(false)
+        refetch()
     }
 
     return (
