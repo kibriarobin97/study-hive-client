@@ -5,6 +5,7 @@ import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
 import { IoCreateOutline } from "react-icons/io5";
 import { useState } from "react";
 import AssignmentModal from "../../../components/Modal/AssignmentModal";
+import ShowAssignment from "./ShowAssignment";
 
 const MyClassDetails = () => {
 
@@ -41,11 +42,6 @@ const MyClassDetails = () => {
                         <div className="stat-title font-bold">Total Assignment</div>
                         <div className="stat-value">{classes?.assignment}</div>
                     </div>
-
-                    <div className="stat text-center border-primary">
-                        <div className="stat-title font-bold">Per day Assignment </div>
-                        <div className="stat-value">1,200</div>
-                    </div>
                 </div>
                 <div className="my-5">
                     <button 
@@ -57,6 +53,10 @@ const MyClassDetails = () => {
                 classes={classes}
                 closeModal={closeModal}
             ></AssignmentModal>
+
+            <ShowAssignment
+            classes={classes}
+            ></ShowAssignment>
             </div>
         </div>
     );

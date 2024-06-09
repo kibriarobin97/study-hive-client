@@ -5,12 +5,13 @@ import SubmitAssignment from "./SubmitAssignment";
 const AssignmentCard = ({ classes }) => {
 
     const [assignments, setAssignments] = useState([])
+    const [reload, setReload] = useState(false)
 
     useEffect(() => {
         fetch(`http://localhost:5000/assignment/${classes?.classId}`)
             .then(res => res.json())
             .then(data => setAssignments(data))
-    }, [classes?.classId])
+    }, [classes?.classId, reload])
 
     
 
@@ -38,6 +39,8 @@ const AssignmentCard = ({ classes }) => {
                                 key={assignment?._id}
                                 assignment={assignment}
                                 idx={idx}
+                                reload={reload}
+                                setReload={setReload}
                                 classes={classes}
                                 ></SubmitAssignment>) 
                             }

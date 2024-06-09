@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PropTypes from 'prop-types';
 
-const SubmitAssignment = ({assignment, classes, idx}) => {
+const SubmitAssignment = ({assignment, classes, idx, reload, setReload}) => {
 
     const {_id, assignmentTitle, description, title, deadline, status, category} = assignment;
 
@@ -35,6 +35,7 @@ const SubmitAssignment = ({assignment, classes, idx}) => {
         }
 
         await mutateAsync(submitInfo)
+        setReload(!reload)
     }
 
     return (
@@ -67,6 +68,8 @@ SubmitAssignment.propTypes = {
     assignment: PropTypes.object,
     classes: PropTypes.object,
     idx: PropTypes.number,
+    reload: PropTypes.bool,
+    setReload: PropTypes.bool,
 }
 
 export default SubmitAssignment;
