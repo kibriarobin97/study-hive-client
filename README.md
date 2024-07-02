@@ -1,6 +1,10 @@
 ## Website Name: Study Hive
 ## Live Link: https://study-hive-388ef.web.app
 ## Category: Educational Platform
+## Project Overview:
+  Study Hive is an educational platform designed to streamline learning management with a focus on user experience and administrative efficiency. Implemented using the MERN stack, it     
+  offers a responsive and secure environment for students, teachers, and administrators alike. Key features include dynamic class management, interactive dashboards, secure 
+  authentication, and seamless payment integration.
 ## Features: 
 1. MERN Stack Implementation.
 3. Responsive Design.
