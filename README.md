@@ -24,3 +24,4 @@
   - Node.js
   - Express.js
   - MongoDB
+  - Firebase Authentication
