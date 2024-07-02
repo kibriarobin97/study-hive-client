@@ -14,3 +14,9 @@
 11. Feedback and Evaluation.
 12. Secure Authentication.
 13. Payment Method Integration.
+## Technology:
+  - Tailwind CSS
+  - React.js
+  - Node.js
+  - Express.js
+  - MongoDB
